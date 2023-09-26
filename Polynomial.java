@@ -296,7 +296,8 @@ public class Polynomial {
 		// System.out.println(Arrays.deepToString(polDict));
 		int count = 0;
 		boolean a = true;
-		int[] expTest = new int[pol.exps.length];
+		double[] expTest = new double[pol.exps.length];
+        ArrayList<Integer> testing = new ArrayList<>();
 		// find new array where values are not the same as exps
 		for (int i = 0; i < pol.exps.length; i++) {
 			for (int j = 0; j < exps.length; j++) {
@@ -305,6 +306,10 @@ public class Polynomial {
 					// add coeff for repeating exps
 					Dict[j][0] += pol.coefficients[i];
 					polDict[i][0] = Dict[j][0];
+                    if(polDict[i][0]==0 && Dict[j][0]==0){
+                        polDict[i][1]=-1;
+                        Dict[j][1]=-1;
+                    }
 				}
 			}
 			if (a == true) {
@@ -315,15 +320,19 @@ public class Polynomial {
 		}
 		// System.out.println(Arrays.toString(expTest));
 		// add expTest and exps together to new array
-		int[] retExps = new int[exps.length + count];
+		//int[] retExps = new int[exps.length + count];
 		// System.out.println(exps.length);
-		int i = 0;
-		for (i = 0; i < exps.length; i++) {
-			retExps[i] = exps[i];
+		for (int i = 0; i < exps.length; i++) {
+            if(Dict[i][1]!=-1) {
+				testing.add((int)Dict[i][1]);
+			}
 		}
 		for (int j = 0; j < count; j++) {
-
-			retExps[i + j] = expTest[j];
+			testing.add((int)expTest[j]);
+		}
+		int[] retExps=new int[testing.size()];
+		for(int i=0; i<retExps.length;i++){
+			retExps[i]=testing.get(i);
 		}
 		// System.out.println(Arrays.toString(retExps));
 		// bubble sort
