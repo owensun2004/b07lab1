@@ -9,16 +9,17 @@ import java.util.Scanner;
 public class Driver {
 	public static void main(String[] args) throws IOException {
 
-		double[] c1 = { 1, 2 };
-		int[] e1 = { 1, 0};
+		double[] c1 = { 2, 1, 3, 4, 9, 8};
+		int[] e1 = { 3, 4, 5, 1, 6,7};
 		Polynomial p1 = new Polynomial(c1, e1);
-		double[] c2 = { -3, 1 };
-		int[] e2 = { 0, 1};
+		double[] c2 = { 2, 3, -7, -2};
+		int[] e2 = { 5, 4, 8, 1};
 		Polynomial p2 = new Polynomial(c2, e2);
 		File filePath = new File("TestCases.txt");
-		Polynomial p3 = p2.multiply(p1);
+		Polynomial p3 = p1.add(p2);
 		System.out.println(Arrays.toString(p3.coefficients));
 		System.out.println(Arrays.toString(p3.exps));
+		System.out.println(p1.evaluate(0.1));
 		p3.saveToFile("Output.txt");
 		/*
 		 * double[] c1 = { 1, 2 };
